@@ -1,0 +1,41 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="yuriibuhryn (generated)" id="1537954415023-1">
+        <createSequence sequenceName="ORDER_SEQ" startValue="1000" incrementBy="1"/>
+    </changeSet>
+    <changeSet author="yuriibuhryn (generated)" id="1537954415023-2">
+        <createSequence sequenceName="PHONE_ORDER_SEQ" startValue="1000" incrementBy="1"/>
+    </changeSet>
+    <changeSet author="yuriibuhryn (generated)" id="1537954415023-3">
+        <createTable tableName="order_catalog">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="order_catalogPK"/>
+            </column>
+            <column name="uuid" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="first_name" type="VARCHAR(255)"/>
+            <column name="last_name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="yuriibuhryn (generated)" id="1537954415023-4">
+        <createTable tableName="phone_order_catalog">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="phone_order_catalogPK"/>
+            </column>
+            <column name="description" type="VARCHAR(1000)"/>
+            <column name="image_url" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="price" type="FLOAT8"/>
+            <column name="phone_uuid" type="VARCHAR(255)"/>
+            <column name="order_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="yuriibuhryn (generated)" id="1537954415023-5">
+        <addUniqueConstraint columnNames="uuid" constraintName="UC_ORDER_CATALOGUUID_COL" tableName="order_catalog"/>
+    </changeSet>
+    <changeSet author="yuriibuhryn (generated)" id="1537954415023-6">
+        <addForeignKeyConstraint baseColumnNames="order_id" baseTableName="phone_order_catalog" constraintName="FK_cvk2lkartl7nmfhajwk11vc3h" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="order_catalog"/>
+    </changeSet>
+</databaseChangeLog>

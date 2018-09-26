@@ -1,0 +1,44 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <property name="now" value="now()" dbms="postgresql"/>
+    <changeSet author="yuriibuhryn" id="1526469482851-1">
+        <insert tableName="image_catalog">
+            <column name="id" value="1"/>
+            <column name="uuid" value="dc89cc72-7ff0-40c8-a23a-c95ca533524a"/>
+        </insert>
+        <insert tableName="image_catalog">
+            <column name="id" value="2"/>
+            <column name="uuid" value="b3925ea8-4cf9-4a76-845d-ef25dfcf37a5"/>
+        </insert>
+        <insert tableName="image_catalog">
+            <column name="id" value="3"/>
+            <column name="uuid" value="2f2b20ad-0f47-41b5-8c1d-e022dc142f9e"/>
+        </insert>
+    </changeSet>
+    <changeSet author="yuriibuhryn" id="1526469482851-2">
+        <insert tableName="phone_catalog">
+            <column name="id" value="1"/>
+            <column name="uuid" value="3716a81b-4092-478c-a2d1-e8f847c864a4"/>
+            <column name="name" value="Iphone XS"/>
+            <column name="description" value="The last version of Iphone"/>
+            <column name="price" value="1000"/>
+            <column name="image_id" value="1"/>
+        </insert>
+        <insert tableName="phone_catalog">
+            <column name="id" value="2"/>
+            <column name="uuid" value="48c7dd72-e547-42e1-bd5b-1a530cb90c02"/>
+            <column name="name" value="Iphone XS Max"/>
+            <column name="description" value="The last version of Iphone with large screen"/>
+            <column name="price" value="1500"/>
+            <column name="image_id" value="2"/>
+        </insert>
+        <insert tableName="phone_catalog">
+            <column name="id" value="3"/>
+            <column name="uuid" value="7ead45f3-4274-4082-b59f-397ada3987fa"/>
+            <column name="name" value="Iphone XR"/>
+            <column name="description" value="The last version of Iphone with lcd screen"/>
+            <column name="price" value="900"/>
+            <column name="image_id" value="3"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

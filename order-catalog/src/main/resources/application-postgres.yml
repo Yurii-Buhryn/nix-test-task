@@ -1,0 +1,15 @@
+spring:
+    datasource:
+        url: postgres://postgres:adminadmin@localhost:5432/local_order_catalog
+        dataSourceClassName: org.postgresql.ds.PGSimpleDataSource
+    jpa:
+        hibernate:
+            ddl-auto: none
+            use-new-id-generator-mappings: true
+        properties:
+            dialect: org.hibernate.dialect.PostgreSQLDialect
+            hibernate:
+                temp:
+                    use_jdbc_metadata_defaults: false
+                    use_get_generated_keys: false
+

@@ -1,0 +1,79 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="yuriibuhryn" id="1526469482851-1">
+        <insert tableName="order_catalog">
+            <column name="uuid" value="29cf3b69-cd49-4517-bea3-7ca7e7f0f1de"/>
+            <column name="first_name" value="Customer"/>
+            <column name="last_name" value="Number 1"/>
+            <column name="email" value="customer1@gmail.com"/>
+        </insert>
+        <insert tableName="order_catalog">
+            <column name="uuid" value="57f6b9d2-3ddc-4e17-817d-1f7433554ec5"/>
+            <column name="first_name" value="Customer"/>
+            <column name="last_name" value="Number 2"/>
+            <column name="email" value="customer2@gmail.com"/>
+        </insert>
+        <insert tableName="order_catalog">
+            <column name="uuid" value="03ef381d-5aa0-44ff-8a66-26c7c6c9277f"/>
+            <column name="first_name" value="Customer"/>
+            <column name="last_name" value="Number 3"/>
+            <column name="email" value="customer3@gmail.com"/>
+        </insert>
+        <insert tableName="order_catalog">
+            <column name="uuid" value="d310d6ea-3ded-4c08-bd75-2b4b292c44bb"/>
+            <column name="first_name" value="Customer"/>
+            <column name="last_name" value="Number 4"/>
+            <column name="email" value="customer4@gmail.com"/>
+        </insert>
+    </changeSet>
+    <changeSet author="yuriibuhryn" id="1526469482851-2">
+        <insert tableName="phone_order_catalog">
+            <column name="phone_uuid" value="3716a81b-4092-478c-a2d1-e8f847c864a4"/>
+            <column name="name" value="Iphone XS"/>
+            <column name="description" value="The last version of Iphone"/>
+            <column name="price" value="1000"/>
+            <column name="image_url" value="https://someserver/images/asghuiuashgia-aushgiuahsgiu-aisughiausgh"/>
+            <column name="order_id" valueComputed="(SELECT id from order_catalog where uuid='29cf3b69-cd49-4517-bea3-7ca7e7f0f1de')"/>
+        </insert>
+        <insert tableName="phone_order_catalog">
+            <column name="phone_uuid" value="48c7dd72-e547-42e1-bd5b-1a530cb90c02"/>
+            <column name="name" value="Iphone XS Max"/>
+            <column name="description" value="The last version of Iphone with large screen"/>
+            <column name="price" value="1500"/>
+            <column name="image_url" value="https://someserver/images/asghuiuashgia-aushgiuahsgiu-aisughiausgh"/>
+            <column name="order_id" valueComputed="(SELECT id from order_catalog where uuid='29cf3b69-cd49-4517-bea3-7ca7e7f0f1de')"/>
+        </insert>
+        <insert tableName="phone_order_catalog">
+            <column name="phone_uuid" value="7ead45f3-4274-4082-b59f-397ada3987fa"/>
+            <column name="name" value="Iphone XR"/>
+            <column name="description" value="The last version of Iphone with lcd screen"/>
+            <column name="price" value="900"/>
+            <column name="image_url" value="https://someserver/images/asghuiuashgia-aushgiuahsgiu-aisughiausgh"/>
+            <column name="order_id" valueComputed="(SELECT id from order_catalog where uuid='57f6b9d2-3ddc-4e17-817d-1f7433554ec5')"/>
+        </insert>
+        <insert tableName="phone_order_catalog">
+            <column name="phone_uuid" value="3716a81b-4092-478c-a2d1-e8f847c864a4"/>
+            <column name="name" value="Iphone XS"/>
+            <column name="description" value="The last version of Iphone"/>
+            <column name="price" value="1000"/>
+            <column name="image_url" value="https://someserver/images/asghuiuashgia-aushgiuahsgiu-aisughiausgh"/>
+            <column name="order_id" valueComputed="(SELECT id from order_catalog where uuid='57f6b9d2-3ddc-4e17-817d-1f7433554ec5')"/>
+        </insert>
+        <insert tableName="phone_order_catalog">
+            <column name="phone_uuid" value="48c7dd72-e547-42e1-bd5b-1a530cb90c02"/>
+            <column name="name" value="Iphone XS Max"/>
+            <column name="description" value="The last version of Iphone with large screen"/>
+            <column name="price" value="1500"/>
+            <column name="image_url" value="https://someserver/images/asghuiuashgia-aushgiuahsgiu-aisughiausgh"/>
+            <column name="order_id" valueComputed="(SELECT id from order_catalog where uuid='57f6b9d2-3ddc-4e17-817d-1f7433554ec5')"/>
+        </insert>
+        <insert tableName="phone_order_catalog">
+            <column name="phone_uuid" value="7ead45f3-4274-4082-b59f-397ada3987fa"/>
+            <column name="name" value="Iphone XR"/>
+            <column name="description" value="The last version of Iphone with lcd screen"/>
+            <column name="price" value="900"/>
+            <column name="image_url" value="https://someserver/images/asghuiuashgia-aushgiuahsgiu-aisughiausgh"/>
+            <column name="order_id" valueComputed="(SELECT id from order_catalog where uuid='03ef381d-5aa0-44ff-8a66-26c7c6c9277f')"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

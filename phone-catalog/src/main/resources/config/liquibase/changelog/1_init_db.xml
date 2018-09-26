@@ -1,0 +1,39 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="yuriibuhryn (generated)" id="1537787784267-1">
+        <createSequence sequenceName="hibernate_sequence"/>
+    </changeSet>
+    <changeSet author="yuriibuhryn (generated)" id="1537787784267-2">
+        <createTable tableName="image_catalog">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="image_catalogPK"/>
+            </column>
+            <column name="uuid" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="yuriibuhryn (generated)" id="1537787784267-3">
+        <createTable tableName="phone_catalog">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="phone_catalogPK"/>
+            </column>
+            <column name="uuid" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(1000)"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="price" type="FLOAT8"/>
+            <column name="image_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="yuriibuhryn (generated)" id="1537787784267-4">
+        <addUniqueConstraint columnNames="uuid" constraintName="UC_IMAGE_CATALOGUUID_COL" tableName="image_catalog"/>
+    </changeSet>
+    <changeSet author="yuriibuhryn (generated)" id="1537787784267-5">
+        <addUniqueConstraint columnNames="uuid" constraintName="UC_PHONE_CATALOGUUID_COL" tableName="phone_catalog"/>
+    </changeSet>
+    <changeSet author="yuriibuhryn (generated)" id="1537787784267-6">
+        <addForeignKeyConstraint baseColumnNames="image_id" baseTableName="phone_catalog" constraintName="FK_9cab6kppyfhe4643x606darav" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="image_catalog"/>
+    </changeSet>
+</databaseChangeLog>
