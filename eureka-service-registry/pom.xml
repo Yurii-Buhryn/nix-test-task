@@ -8,7 +8,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>service-registry</name>
+	<name>eureka-service-registry</name>
 	<description>Eureka service registry for Phone Market</description>
 
 	<parent>

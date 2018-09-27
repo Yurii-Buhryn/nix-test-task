@@ -4,6 +4,7 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import liquibase.integration.spring.SpringLiquibase;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -15,7 +16,6 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
 import org.springframework.util.StringUtils;
 
-import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -24,7 +24,7 @@ import java.util.Arrays;
 @Slf4j
 @Configuration
 @EnableConfigurationProperties({LiquibaseProperties.class})
-public class DatabaseConfiguration implements EnvironmentAware {
+public class DatabaseConfiguration implements EnvironmentAware, InitializingBean {
 
     public static final String DATABASE_URL = "DATABASE_URL";
     private Environment env;
@@ -35,8 +35,8 @@ public class DatabaseConfiguration implements EnvironmentAware {
         this.env = env;
     }
 
-    @PostConstruct
-    public void init() {
+    @Override
+    public void afterPropertiesSet() {
         if (env.containsProperty(DATABASE_URL)) {
             databaseUrl = env.getProperty(DATABASE_URL);
         }

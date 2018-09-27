@@ -4,6 +4,7 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import liquibase.integration.spring.SpringLiquibase;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -12,11 +13,9 @@ import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
 import org.springframework.util.StringUtils;
 
-import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -25,7 +24,7 @@ import java.util.Arrays;
 @Slf4j
 @Configuration
 @EnableConfigurationProperties({LiquibaseProperties.class})
-public class DatabaseConfiguration implements EnvironmentAware {
+public class DatabaseConfiguration implements EnvironmentAware, InitializingBean {
 
     public static final String DATABASE_URL = "DATABASE_URL";
     private Environment env;
@@ -36,8 +35,8 @@ public class DatabaseConfiguration implements EnvironmentAware {
         this.env = env;
     }
 
-    @PostConstruct
-    public void init() {
+    @Override
+    public void afterPropertiesSet() {
         if (env.containsProperty(DATABASE_URL)) {
             databaseUrl = env.getProperty(DATABASE_URL);
         }
@@ -64,7 +63,7 @@ public class DatabaseConfiguration implements EnvironmentAware {
         config.setDataSourceClassName(dataSourceClassName);
         config.setMaximumPoolSize(5);
 
-        // first check if we have DB connection props in Spring Boot YML fconfiguration
+        // first check if we have DB connection props in Spring Boot YML configuration
         if (hasDbPropsInConfigFile()) {
             // first check if there is a full JDCB connection URL
             if (hasJdbcConnectionUrl()) {
@@ -82,9 +81,11 @@ public class DatabaseConfiguration implements EnvironmentAware {
         }
         // then check if DATABASE_URL env set
         else if (!StringUtils.isEmpty(databaseUrl)) {
+            // if true, it comes from Heroku
             if (databaseUrl.startsWith("postgres")) {
                 loadDbCredentialsProps(config, databaseUrl);
             }
+            // else its a normal Postgres JDBC connection string
             else if (databaseUrl.startsWith("jdbc:postgres")) {
                 config.addDataSourceProperty("url", databaseUrl);
             } else {
@@ -113,7 +114,7 @@ public class DatabaseConfiguration implements EnvironmentAware {
         String username = dbUri.getUserInfo().split(":")[0];
         String password = dbUri.getUserInfo().split(":")[1];
         String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
-        log.debug("DATABASE_URL is now: {}", dbUrl);
+        log.debug("Heroku DATABASE_URL is now: {}", dbUrl);
         config.addDataSourceProperty("url", dbUrl);
         loadUserPassFromProps(config, username, password);
     }
@@ -137,7 +138,12 @@ public class DatabaseConfiguration implements EnvironmentAware {
         liquibase.setContexts(liquibaseProperties.getContexts());
         liquibase.setDefaultSchema(liquibaseProperties.getDefaultSchema());
         liquibase.setDropFirst(liquibaseProperties.isDropFirst());
-        liquibase.setShouldRun(liquibaseProperties.isEnabled());
+        if (env.acceptsProfiles("dev", "prod", "batch")) {
+            liquibase.setShouldRun(false);
+        } else {
+            liquibase.setShouldRun(liquibaseProperties.isEnabled());
+            log.debug("Configuring Liquibase");
+        }
         return liquibase;
     }
 }

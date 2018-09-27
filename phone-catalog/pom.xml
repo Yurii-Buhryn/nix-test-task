@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.nix</groupId>
-	<artifactId>phone-service</artifactId>
+	<artifactId>phone-catalog</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>phone-catalog-service</name>
+	<name>phone-catalog</name>
 	<description>Service for Phones</description>
 
 	<parent>
