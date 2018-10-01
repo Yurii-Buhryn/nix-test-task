@@ -8,7 +8,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Optional;
@@ -32,8 +31,8 @@ public class PhoneServiceTest {
         assertTrue(phone.isPresent());
         assertEquals(phone.get().getName(), "Iphone XS");
         assertEquals(phone.get().getDescription(), "The last version of Iphone");
-        assertEquals(phone.get().getPrice(), new Double(1000));
-        assertEquals(phone.get().getImage().getId(), new Long(1));
+        assertEquals(phone.get().getPrice(), Double.valueOf(1000));
+        assertEquals(phone.get().getImage().getId(), Long.valueOf(1));
     }
 
     @Test

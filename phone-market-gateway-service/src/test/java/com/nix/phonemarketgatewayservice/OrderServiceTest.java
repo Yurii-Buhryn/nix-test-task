@@ -127,6 +127,6 @@ public class OrderServiceTest {
                 calculatedOrder.getPhones().stream()
                         .filter(phone -> phone.getStatus().equals(PhoneStatus.UNAVAILABLE))
                         .count(), 1L);
-        assertEquals(calculatedOrder.getPrice(), new Double(400));
+        assertEquals(calculatedOrder.getPrice(), Double.valueOf(400));
     }
 }

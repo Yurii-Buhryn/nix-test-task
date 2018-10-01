@@ -24,7 +24,7 @@
 		<java.version>10</java.version>
 		<spring-cloud.version>Finchley.SR1</spring-cloud.version>
 		<liquibase.version>3.5.3</liquibase.version>
-		<spring.boot.mainclass>com.axa.flow.PhoneServiceApplication</spring.boot.mainclass>
+		<spring.boot.mainclass>com.nix.phoneservice.PhoneServiceApplication</spring.boot.mainclass>
 	</properties>
 
 	<dependencies>
